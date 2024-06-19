@@ -2,6 +2,7 @@
 
 export(np_robust)
 importFrom(dplyr,as_tibble)
+importFrom(dplyr,select)
 importFrom(marginaleffects,avg_comparisons)
 importFrom(marginaleffects,avg_slopes)
 importFrom(marginaleffects,datagrid)
