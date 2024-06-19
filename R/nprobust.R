@@ -17,6 +17,7 @@
 #'
 #' @importFrom marginaleffects avg_comparisons avg_slopes datagrid
 #' @importFrom stats pnorm
+#' @importFrom dplyr as_tibble
 #' @export
 np_robust <- function(base_mod,
                       robust_mod,
@@ -41,5 +42,5 @@ np_robust <- function(base_mod,
     pnorm(b_comps$conf.low, b_rob$estimate, b_rob$std.error)
   res <- b_comps[,c("term", "contrast", "estimate", "std.error", "conf.low", "conf.high")]
   res$robust<- rob
-  res
+  as_tibble(res)
 }
