@@ -44,8 +44,8 @@ np_robust <- function(base_mod,
     b_rob <- suppressWarnings(do.call(avg_slopes, robust_args))
   }
   if(type == "pred"){
-    base_args$condition <- vbl
-    robust_args$condition <- vbl
+    base_args$variables <- vbl
+    robust_args$variables <- vbl
     b_comps <- suppressWarnings(do.call(avg_predictions, base_args))
     b_rob <- suppressWarnings(do.call(avg_predictions, robust_args))
   }
