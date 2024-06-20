@@ -10,7 +10,7 @@ np_robust(
   vbl,
   base_args = list(),
   robust_args = list(),
-  type = c("fd", "slope"),
+  type = c("fd", "slope", "pred"),
   ...
 )
 }
@@ -27,7 +27,7 @@ whose robustness is being tested.}
 \item{robust_args}{Arguments to be passed to `avg_slopes()` or `avg_comparisons()` that govern the baseline model effects; these should produce the same number of
 effect estimates as the base_args specification does.}
 
-\item{type}{The quantity being tested - first difference "fd" or marginal effect "slope".}
+\item{type}{The quantity being tested - first difference "fd",  marginal effect "slope", or prediction "pred".}
 
 \item{...}{Other arguments to be passed down, not implemented.}
 }

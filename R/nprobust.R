@@ -7,7 +7,7 @@
 #' @param robust_mod An alternative robustness object
 #' @param vbl A character string giving the variable
 #' whose robustness is being tested.
-#' @param type The quantity being tested - first difference "fd" or marginal effect "slope".
+#' @param type The quantity being tested - first difference "fd",  marginal effect "slope", or prediction "pred".
 #' @param base_args Arguments to be passed to `avg_slopes()` or `avg_comparisons()` that govern the baseline model effects.
 #' @param robust_args Arguments to be passed to `avg_slopes()` or `avg_comparisons()` that govern the baseline model effects; these should produce the same number of
 #' effect estimates as the base_args specification does.
@@ -24,7 +24,7 @@ np_robust <- function(base_mod,
                       vbl,
                       base_args = list(),
                       robust_args = list(),
-                      type = c("fd", "slope"),
+                      type = c("fd", "slope", "pred"),
                       ...){
   type <- match.arg(type)
   base_args$model <- base_mod
@@ -34,9 +34,14 @@ np_robust <- function(base_mod,
   if(type == "fd"){
     b_comps <- suppressWarnings(do.call(avg_comparisons, base_args))
     b_rob <- suppressWarnings(do.call(avg_comparisons, robust_args))
-  }else{
+  }
+  if(type == "slope"){
     b_comps <- suppressWarnings(do.call(avg_slopes, base_args))
     b_rob <- suppressWarnings(do.call(avg_slopes, robust_args))
+  }
+  if(type == "pred"){
+    b_comps <- suppressWarnings(do.call(avg_predictions, base_args))
+    b_rob <- suppressWarnings(do.call(avg_predictions, robust_args))
   }
   rob <- pnorm(b_comps$conf.high, b_rob$estimate, b_rob$std.error) -
     pnorm(b_comps$conf.low, b_rob$estimate, b_rob$std.error)
