@@ -15,7 +15,7 @@
 #'
 #' @returns A data frame that contains the robust model estimate and standard error along with the 95% CI from the baseline model and the robustness calculation.
 #'
-#' @importFrom marginaleffects avg_comparisons avg_slopes datagrid
+#' @importFrom marginaleffects avg_comparisons avg_predictions avg_slopes datagrid
 #' @importFrom stats pnorm
 #' @importFrom dplyr as_tibble select
 #' @export
