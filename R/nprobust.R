@@ -45,7 +45,7 @@ np_robust <- function(base_mod,
   }
   rob <- pnorm(b_comps$conf.high, b_rob$estimate, b_rob$std.error) -
     pnorm(b_comps$conf.low, b_rob$estimate, b_rob$std.error)
-  res <- select(b_comps, c(term:std.error,  "conf.low", "conf.high"))
+  res <- select(b_comps, c(1:std.error,  "conf.low", "conf.high"))
   res$robust<- rob
   as_tibble(res)
 }
