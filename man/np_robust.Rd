@@ -32,7 +32,7 @@ effect estimates as the base_args specification does.}
 \item{...}{Other arguments to be passed down, not implemented.}
 }
 \value{
-A data frame that contains the baseline effect, SE and 95% CI along with the robustness calculation.
+A data frame that contains the robust model estimate and standard error along with the 95% CI from the baseline model and the robustness calculation.
 }
 \description{
 Calculate the Neumayer and Pluemper (2017) measure

@@ -13,7 +13,7 @@
 #' effect estimates as the base_args specification does.
 #' @param ... Other arguments to be passed down, not implemented.
 #'
-#' @returns A data frame that contains the baseline effect, SE and 95% CI along with the robustness calculation.
+#' @returns A data frame that contains the robust model estimate and standard error along with the 95% CI from the baseline model and the robustness calculation.
 #'
 #' @importFrom marginaleffects avg_comparisons avg_slopes datagrid
 #' @importFrom stats pnorm
@@ -51,7 +51,9 @@ np_robust <- function(base_mod,
   }
   rob <- pnorm(b_comps$conf.high, b_rob$estimate, b_rob$std.error) -
     pnorm(b_comps$conf.low, b_rob$estimate, b_rob$std.error)
-  res <- select(b_comps, c(1:std.error,  "conf.low", "conf.high"))
+  res <- select(b_rob, 1:std.error) %>%
+    mutate(conf.low = b_comps$conf.low,
+           conf.high = b_comps$conf.high)
   res$robust<- rob
   as_tibble(res)
 }
